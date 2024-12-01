@@ -1,17 +1,19 @@
 import { Paper } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./TablePanel.css";
 
 function TablePanel() {
   const [rows, setRows] = useState<any[]>([]);
-  const [page, setPage] = useState<number>(0);
-  const [pageSize, setPageSize] = useState<number>(50);
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 50,
+  });
   const [rowCount, setRowCount] = useState<number>(0);
 
-  //column definition
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 100 },
+    { field: "id", headerName: "ID", width: 80 },
     { field: "state", headerName: "State", width: 200 },
     { field: "year", headerName: "Year", width: 150 },
     { field: "crimeType", headerName: "Crime Type", width: 200 },
@@ -22,8 +24,8 @@ function TablePanel() {
     try {
       const response = await axios.get("http://localhost:8090/api/v1/getList", {
         params: {
-          page: page,
-          size: pageSize,
+          page: paginationModel.page,
+          size: paginationModel.pageSize,
         },
       });
       if (response.status === 200) {
@@ -45,34 +47,33 @@ function TablePanel() {
 
   useEffect(() => {
     fetchData();
-  }, [page, pageSize]);
+  }, [paginationModel]);
 
-  const onPageChangeClick = () => {
-    console.log("clicked");
+  const onPageChangeClick = (newValue: any) => {
+    setPaginationModel(newValue);
   };
+
   return (
-    <div
-      style={{
-        alignContent: "center",
-        height: "calc(90vh - 64px)",
-        width: "94%",
-        padding: "16px",
-      }}
-    >
+    <div className="table_panel">
       <Paper
-        sx={{ height: "calc(80vh - 64px)", width: "100%", padding: "16px" }}
+        sx={{
+          display: "flex",
+          position: "relative",
+          height: "70vh",
+          width: "96%",
+          padding: "16px",
+          flexDirection: "column",
+        }}
+        elevation={3}
       >
         <DataGrid
           rows={rows}
           columns={columns}
           rowCount={rowCount}
-          pagination
           paginationMode="server"
-          pageSizeOptions={[10, 20]}
-          
-          sx={{
-            border: 0,
-          }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={onPageChangeClick}
+          sx={{ flex: 1, border: 0 }}
         />
       </Paper>
     </div>
