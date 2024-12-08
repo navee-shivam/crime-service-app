@@ -2,5 +2,5 @@
 UI layer of crime-service repository
 
 The repository had the below UX/UI.
+![image](https://github.com/user-attachments/assets/13ac5922-382a-46bb-9d18-b8396ca57d52)
 
-![screencapture-localhost-5173-2024-12-08-18_51_25](https://github.com/user-attachments/assets/54578e54-4253-4941-9806-1ba4185fc6d5)
