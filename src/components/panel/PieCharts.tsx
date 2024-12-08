@@ -16,13 +16,13 @@ interface PieChartsProps {
 function PieCharts({ stateName }: PieChartsProps) {
   const [data, setData] = useState([]);
   const COLORS = [
-    "#E57373", // Darker Pink
-    "#64B5F6", // Darker Light Blue
-    "#81C784", // Darker Light Green
-    "#FFB74D", // Darker Peach
-    "#BA68C8", // Darker Plum
-    "#FFD54F", // Darker Moccasin
-    "#90CAF9", // Darker Powder Blue
+    "#E57373",
+    "#64B5F6",
+    "#81C784",
+    "#FFB74D",
+    "#BA68C8",
+    "#FFD54F",
+    "#90CAF9",
   ];
 
   const fetchApi = async () => {
