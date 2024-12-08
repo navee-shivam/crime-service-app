@@ -3,15 +3,20 @@ import { scaleLinear } from "d3-scale";
 import { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
+interface SelectedStateProps {
+  selectedState: string;
+  setSelectedState: (state: string) => void;
+}
+
 const INDIA_JSON = "/assets/india.json";
 
-const MapPanel = () => {
+const MapPanel = ({ selectedState, setSelectedState }: SelectedStateProps) => {
   const [mapData, setMapData] = useState<any>(null);
   const [crimeData, setCrimeData] = useState<any[]>([]);
 
   const colorScale = scaleLinear(
     [50, 500000], //map dense range
-    ["#67DC38", "#0D095F"] //color codes for bold of state
+    ["#77EC95", "#072859"] //color codes for bold of state
   );
 
   const fetchMap = () => {
@@ -54,12 +59,14 @@ const MapPanel = () => {
     return stateData ? Number(stateData.crimeRate) : 0;
   };
 
-  const selectedState = (stateId: string) => {
+  const onStateClicked = (stateId: string) => {
     console.log("selected : " + stateId);
+    setSelectedState(stateId);
+    console.log(setSelectedState);
   };
 
   return (
-    <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto" }}>
+    <div style={{ width: "100%", maxWidth: "1500px", margin: "0 auto" }}>
       <h1>Crime Rate in India till now</h1>
       <ComposableMap
         projection="geoMercator"
@@ -83,7 +90,7 @@ const MapPanel = () => {
                       hover: { fill: "#F53", outline: "none" },
                       pressed: { fill: "#E42", outline: "none" },
                     }}
-                    onClick={() => selectedState(geo.id)}
+                    onClick={() => onStateClicked(geo.id)}
                   />
                 );
               })

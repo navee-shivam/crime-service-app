@@ -8,9 +8,12 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import DropDown from "./DropDown";
 
-function PieCharts() {
+interface PieChartsProps {
+  stateName: string;
+}
+
+function PieCharts({ stateName }: PieChartsProps) {
   const [data, setData] = useState([]);
   const COLORS = [
     "#878686",
@@ -21,8 +24,6 @@ function PieCharts() {
     "#60E02D",
     "#0901E2",
   ];
-
-  const [stateName, setStateName] = useState("assam");
 
   const fetchApi = async () => {
     try {
@@ -48,13 +49,14 @@ function PieCharts() {
   };
 
   useEffect(() => {
-    fetchApi();
+    if (stateName) {
+      fetchApi();
+    }
   }, [stateName]);
 
   return (
     <>
-      <DropDown stateName={stateName} setStateName={setStateName} />
-      <ResponsiveContainer width="30%" height={400}>
+      <ResponsiveContainer>
         <PieChart>
           <Pie
             data={data}

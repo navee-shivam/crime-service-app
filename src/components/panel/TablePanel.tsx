@@ -2,7 +2,6 @@ import { Paper } from "@mui/material";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./TablePanel.css";
 
 function TablePanel() {
   const [rows, setRows] = useState<any[]>([]);
@@ -54,29 +53,27 @@ function TablePanel() {
   };
 
   return (
-    <div className="table_panel">
-      <Paper
-        sx={{
-          display: "flex",
-          position: "relative",
-          height: "70vh",
-          width: "96%",
-          padding: "16px",
-          flexDirection: "column",
-        }}
-        elevation={3}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          rowCount={rowCount}
-          paginationMode="server"
-          paginationModel={paginationModel}
-          onPaginationModelChange={onPageChangeClick}
-          sx={{ flex: 1, border: 0 }}
-        />
-      </Paper>
-    </div>
+    <Paper
+      sx={{
+        display: "flex",
+        position: "relative",
+        height: "70vh",
+        width: "96%",
+        padding: "16px",
+        flexDirection: "column",
+      }}
+      elevation={3}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        rowCount={rowCount}
+        paginationMode="server"
+        paginationModel={paginationModel}
+        onPaginationModelChange={onPageChangeClick}
+        sx={{ flex: 1, border: 0 }}
+      />
+    </Paper>
   );
 }
 
