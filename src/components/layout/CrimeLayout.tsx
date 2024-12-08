@@ -61,7 +61,7 @@ function CrimeLayout() {
                   fontWeight: "bold",
                 }}
               >
-                Map Wise Data
+                State Map Wise Data
               </Typography>
               <MapPanel
                 selectedState={selectedState}
