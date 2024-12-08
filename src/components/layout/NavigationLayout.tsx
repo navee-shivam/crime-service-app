@@ -1,4 +1,6 @@
 import {
+  DetailsRounded,
+  FormatLineSpacingSharp,
   Grid4x4Rounded,
   MapRounded,
   PieChartRounded,
@@ -24,6 +26,8 @@ function NavigationLayout() {
       case 2:
         navigate("/chart");
         break;
+      case 3:
+        navigate("/form");
       default:
         break;
     }
@@ -44,6 +48,7 @@ function NavigationLayout() {
       <BottomNavigationAction label="Grid-View" icon={<Grid4x4Rounded />} />
       <BottomNavigationAction label="Map-View" icon={<MapRounded />} />
       <BottomNavigationAction label="Chart-View" icon={<PieChartRounded />} />
+      <BottomNavigationAction label="Form-View" icon={<DetailsRounded />} />
     </BottomNavigation>
   );
 }
