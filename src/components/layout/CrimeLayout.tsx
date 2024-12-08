@@ -1,69 +1,125 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import TablePanel from "../panel/TablePanel";
 import PieCharts from "../panel/PieCharts";
 import MapPanel from "../panel/MapPanel";
 import { useState } from "react";
+import Header from "../panel/Header";
+import { ResponsiveContainer } from "recharts";
 
 function CrimeLayout() {
-  //set the default value to assam
   const [selectedState, setSelectedState] = useState<string>("Assam");
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{
-        padding: "12px",
-        display: "grid",
-        gridTemplateColumns: "1fr 2fr", // Left (Grid) 1/3, Right (Map + Pie Chart) 2/3
-        gap: "20px",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-        borderRadius: "8px",
-        backgroundColor: "#fff",
-      }}
-    >
-      <Box
+    <div>
+      <Header />
+      <Container
+        maxWidth="xl"
         sx={{
-          backgroundColor: "#f0f0f0",
-          padding: "20px",
+          padding: "16px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          backgroundColor: "#fff",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           borderRadius: "8px",
         }}
       >
-        <TablePanel />
-      </Box>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateRows: "1fr 1fr",
-          gap: "20px",
-        }}
-      >
+        <Box>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              textAlign: "center",
+              marginBottom: "16px",
+              fontWeight: "bold",
+            }}
+          >
+            Crime Data Overview
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "20px",
+            }}
+          >
+            <Box
+              sx={{
+                flex: 1,
+                backgroundColor: "#f0f0f0",
+                padding: "20px",
+                borderRadius: "8px",
+                height: "450px", 
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              <Typography
+                variant="h6"
+                component="h3"
+                sx={{
+                  textAlign: "center",
+                  marginBottom: "12px",
+                  fontWeight: "bold",
+                }}
+              >
+                Map Wise Data
+              </Typography>
+              <MapPanel
+                selectedState={selectedState}
+                setSelectedState={setSelectedState}
+              />
+            </Box>
+
+            <Box
+              sx={{
+                flex: 1,
+                backgroundColor: "#f0f0f0",
+                padding: "20px",
+                borderRadius: "8px",
+                height: "450px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              <Typography
+                variant="h6"
+                component="h3"
+                sx={{
+                  textAlign: "center",
+                  marginBottom: "12px",
+                  fontWeight: "bold",
+                }}
+              >
+                {selectedState.toUpperCase()} Crime Data
+              </Typography>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieCharts stateName={selectedState} />
+              </ResponsiveContainer>
+            </Box>
+          </Box>
+        </Box>
+
         <Box
           sx={{
             backgroundColor: "#f0f0f0",
             padding: "20px",
             borderRadius: "8px",
-            height: "400px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
           }}
         >
-          <MapPanel
-            selectedState={selectedState}
-            setSelectedState={setSelectedState}
-          />
+          <Typography
+            variant="h6"
+            component="h3"
+            sx={{
+              textAlign: "center",
+              marginBottom: "12px",
+              fontWeight: "bold",
+            }}
+          >
+            Detailed Crime Data
+          </Typography>
+          <TablePanel />
         </Box>
-        <Box
-          sx={{
-            backgroundColor: "#f0f0f0",
-            padding: "20px",
-            borderRadius: "8px",
-            height: "400px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <PieCharts stateName={selectedState} />
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

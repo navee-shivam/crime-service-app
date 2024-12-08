@@ -12,11 +12,11 @@ function TablePanel() {
   const [rowCount, setRowCount] = useState<number>(0);
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 80 },
-    { field: "state", headerName: "State", width: 200 },
-    { field: "year", headerName: "Year", width: 150 },
+    { field: "id", headerName: "ID", width: 20 },
+    { field: "state", headerName: "State", width: 100 },
+    { field: "year", headerName: "Year", width: 80 },
     { field: "crimeType", headerName: "Crime Type", width: 200 },
-    { field: "count", headerName: "Count", width: 150 },
+    { field: "count", headerName: "Count", width: 100 },
   ];
 
   const fetchData = async () => {
@@ -58,7 +58,7 @@ function TablePanel() {
         display: "flex",
         position: "relative",
         height: "70vh",
-        width: "96%",
+        width: "90%",
         padding: "16px",
         flexDirection: "column",
       }}

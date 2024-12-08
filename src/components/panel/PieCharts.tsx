@@ -16,13 +16,13 @@ interface PieChartsProps {
 function PieCharts({ stateName }: PieChartsProps) {
   const [data, setData] = useState([]);
   const COLORS = [
-    "#878686",
-    "#D20103",
-    "#FBCD17",
-    "#15F5FF",
-    "#CC6CE7",
-    "#60E02D",
-    "#0901E2",
+    "#E57373", // Darker Pink
+    "#64B5F6", // Darker Light Blue
+    "#81C784", // Darker Light Green
+    "#FFB74D", // Darker Peach
+    "#BA68C8", // Darker Plum
+    "#FFD54F", // Darker Moccasin
+    "#90CAF9", // Darker Powder Blue
   ];
 
   const fetchApi = async () => {
@@ -41,6 +41,7 @@ function PieCharts({ stateName }: PieChartsProps) {
           name: item.stateCrime,
           count: item.count,
         }));
+        console.log(formattedData);
         setData(formattedData);
       }
     } catch (error) {
@@ -56,7 +57,7 @@ function PieCharts({ stateName }: PieChartsProps) {
 
   return (
     <>
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
             data={data}
@@ -75,7 +76,12 @@ function PieCharts({ stateName }: PieChartsProps) {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
+          <Legend
+            fontWeight="bold"
+            layout="vertical"
+            verticalAlign="middle"
+            align="right"
+          />
         </PieChart>
       </ResponsiveContainer>
     </>

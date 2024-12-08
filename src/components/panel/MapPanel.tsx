@@ -67,7 +67,6 @@ const MapPanel = ({ selectedState, setSelectedState }: SelectedStateProps) => {
 
   return (
     <div style={{ width: "100%", maxWidth: "1500px", margin: "0 auto" }}>
-      <h1>Crime Rate in India till now</h1>
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
